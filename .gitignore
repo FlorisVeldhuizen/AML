@@ -6,4 +6,4 @@
 !test.py
 
 # ...even if they are in subdirectories
-!*/
+*/
