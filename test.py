@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import pylab
 import numpy as np
-import operator
+import PIL.Image
 
 # Import the gym module
 import gym
@@ -17,13 +17,14 @@ print("the shape of frame are ", frame.shape)
 
 # Img Sanitizing
 def pongcrop(img):
-    print(img)
-    img = img[50:-16, 0:-1, :]
+    img = img[34:194, 0:159, :]
     return img
 
 
 def grayscale(img):
-    return np.mean(img, axis=2).astype(np.uint8)
+    grayimg = np.array(PIL.Image.fromarray(img).convert('L'))
+    print(grayimg.shape)
+    return grayimg
 
 
 def downsample(img):
@@ -37,9 +38,10 @@ def combosanitize(img):
     img = downsample(img)
     return img
 
+
 # Render
 env.render()
-rangelimit = 21
+rangelimit = 26
 for i in range(rangelimit):
     # Perform a random action, returns the new frame, reward and whether the game is over
     frame, reward, is_done, _ = env.step(env.action_space.sample())
